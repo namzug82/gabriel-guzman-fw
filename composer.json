@@ -2,7 +2,7 @@
     "name": "gabriel/fw",
     "type": "project",
     "require": {
-        "php": ">=5.6"
+        "php": ">=5.5.9"
     },
     "autoload": {
         "psr-4": {
@@ -10,3 +10,4 @@
         }
     }
 }
+
