@@ -6,11 +6,9 @@ use Symfony\Component\Yaml\Parser;
 
 final class YamlParser implements Routing
 {   
-    private $yaml;
-
     public function parseRoutes()
     {
-        $this->yaml = new Parser();
-        return $this->yaml->parse(file_get_contents('../App/Component/Routing/Yaml/routing.yml'));
+        $yaml = new Parser();
+        return $yaml->parse(file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/../src/App/Component/Routing/Yaml/routing.yml'));
     }
 }
