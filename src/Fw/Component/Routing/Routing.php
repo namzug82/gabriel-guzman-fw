@@ -4,5 +4,5 @@ namespace Fw\Component\Routing;
 
 interface Routing 
 {
-    public function routes();
+    public function parseRoutes();
 }

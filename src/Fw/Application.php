@@ -2,7 +2,7 @@
 
 namespace Fw;
 
-use Fw\Component\Routing\;
+use Fw\Component\Routing;
 
 final class Application
 {
