@@ -1,5 +1,4 @@
 <?php
-
 namespace Fw;
 
 use Fw\Component\Routing;

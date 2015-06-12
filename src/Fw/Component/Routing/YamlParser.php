@@ -1,14 +1,19 @@
 <?php
-
 namespace Fw\Component\Routing;
-
-use Symfony\Component\Yaml\Parser;
 
 final class YamlParser implements Routing
 {   
+    private $parser;
+    private $path;
+
+    public function __construct($parser, $path)
+    {
+        $this->parser = $parser;
+        $this->path = $path;
+    }
+
     public function parseRoutes()
     {
-        $yaml = new Parser();
-        return $yaml->parse(file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/../src/App/Component/Routing/Yaml/routing.yml'));
+        return $this->parser->parse(file_get_contents($this->path));
     }
 }

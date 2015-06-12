@@ -1,5 +1,4 @@
 <?php
-
 namespace Fw\Component\Routing;
 
 interface Routing 
