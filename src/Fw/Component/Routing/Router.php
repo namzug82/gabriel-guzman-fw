@@ -33,20 +33,7 @@ final class Router
         $route = $this->getRoute();
         foreach ($route as $key => $value) {
             if ($key == $routeName) {
-                var_dump($value);
                 return $value;
-            }
-        }
-    }
-
-    public function getRoutePath()
-    {
-        $route = $this->getRoute();
-        foreach ($route as $key => $value) {
-            foreach ($value as $key2 => $value2) {
-                if ($key2 == "path") {
-                    return $value2;
-                } 
             }
         }
     }
