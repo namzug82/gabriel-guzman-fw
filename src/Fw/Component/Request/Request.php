@@ -1,9 +1,8 @@
 <?php
 namespace Fw\Component\Request;
 
-class Request implements ArrayAccess 
+class Request implements \ArrayAccess 
 {
-    //private $container = array();
     private $method = array();
     private $path;
 
