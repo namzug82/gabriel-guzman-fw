@@ -1,17 +1,11 @@
 <?php
 namespace Fw\Component\Response;
 
-class Response
+interface Response
 {
     private $data;
 
-    public function __construct($dataFromController) 
-    {
-        $this->data = $dataFromController;
-    }
+    public function __construct($dataFromController);
 
-    public function getData()
-    {
-        return $this->data;
-    }
+    public function getData();
 }

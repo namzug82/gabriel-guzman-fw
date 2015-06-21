@@ -1,10 +1,12 @@
 <?php
 namespace Fw\Component\View;
 
+use Fw\Component\Response\Response;
+
 class TwigView implements WebView
 {
-    public function render($data)
+    public function render(Response $response)
     {
-        echo $data;
+        echo $response->getData();
     }
 }

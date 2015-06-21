@@ -1,6 +1,0 @@
-<?php
-namespace Fw\Component\View;
-
-interface WebView implements View
-{
-}
