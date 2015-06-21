@@ -5,8 +5,6 @@ final class Dispatcher
 {   
     public function getController($requestSubRoute)
     {
-        // $router = $this->getRouter();
-        // $controller = $this->match($request);
         if (! $requestSubRoute) {
             echo "Could not find your resource! \n";
             return false;
