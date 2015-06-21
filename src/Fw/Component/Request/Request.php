@@ -6,7 +6,8 @@ class Request implements \ArrayAccess
     private $method = array();
     private $path;
 
-    public function __construct() {
+    public function __construct() 
+    {
         $this->method = array(
             "get"   => $_GET,
             "post"   => $_POST,

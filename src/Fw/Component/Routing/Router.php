@@ -10,15 +10,9 @@ final class Router
         $this->route = $parsedRoute->parseRoutes();
     }
 
-    public function getRoute()
-    {
-        return $this->route;
-    }
-
     public function getRouteNameIfMatchPath($path)
     {
-        $route = $this->getRoute();
-        foreach ($route as $key => $value) {
+        foreach ($this->route as $key => $value) {
             if (in_array($path, $value)) {
                 return $key;
             } 
@@ -27,8 +21,7 @@ final class Router
 
     public function getSubRouteName($path)
     {
-        $route = $this->getRoute();
-        foreach ($route as $key => $value) {
+        foreach ($this->route as $key => $value) {
             if ($key == $this->getRouteNameIfMatchPath($path)) {
                 $subRoute = $value;
                 return $subRoute;
