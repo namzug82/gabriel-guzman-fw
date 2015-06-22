@@ -5,9 +5,9 @@ class JsonResponse implements Response
 {
     private $data;
 
-    public function __construct($dataFromController) 
+    public function __construct(Array $dataFromController) 
     {
-        $this->data = json_encode($dataFromController);
+        $this->data = $dataFromController;
     }
 
     public function getData()
