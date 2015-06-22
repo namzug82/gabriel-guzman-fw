@@ -1,7 +1,7 @@
 <?php
 namespace Fw\Component\Database;
 
-class PDO implements MySQL
+final class PDO implements MySQL
 {
     private $db;
 
@@ -9,10 +9,10 @@ class PDO implements MySQL
     {
         try {
             $dbh = new \PDO("mysql:host=$host", $user, $password);
-            $dbh->exec("CREATE DATABASE" . 
+            $dbh->exec("CREATE DATABASE " . 
                             $db . 
                             ";
-                        USE" . 
+                        USE " . 
                             $db .
                             ";
                         ")
