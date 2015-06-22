@@ -9,7 +9,7 @@ final class PDO implements MySQL
     {
         try {
             $dbh = new \PDO("mysql:host=$host", $user, $password);
-            $dbh->exec("CREATE DATABASE " . 
+            $dbh->exec("CREATE DATABASE IF NOT EXISTS " . 
                             $db . 
                             ";
                         USE " . 
