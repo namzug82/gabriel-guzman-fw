@@ -15,14 +15,7 @@ class TwigView implements WebView
 
     public function render(Response $response)
     {
-        // echo $response->getData();
-        // // echo $this->twig->render('index.twig', ['tasks' => $tasks]);
-
-        // echo $this->twig->render(array(
-        //                     'name' => 'Clark Kent',
-        //                     'username' => 'ckent',
-        //                     'password' => 'krypt0n1te',
-        //                   ));
-        echo $this->twig->render($response->getTemplateName, $response->parameters);
+        // http://gabriel.fw/index.php/some-page?username=gabriel&password=1234
+        echo $this->twig->render($response->getTemplateName(), $response->getParameters());
     }
 }

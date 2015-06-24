@@ -5,12 +5,8 @@ use Fw\Component\Request\Request;
 
 final class Dispatcher 
 {   
-    private $controller;
-
-    public function __construct(Request $request)
+    public function getController($requestSubRoute)
     {
-        $requestSubRoute = $request->getPath();
-
         if (! $requestSubRoute) {
             echo "Could not find your resource! \n";
             return false;
@@ -21,10 +17,6 @@ final class Dispatcher
                 } 
             }    
         }
-    }
-
-    public function getController()
-    {
         return $this->controller;
     }
 }

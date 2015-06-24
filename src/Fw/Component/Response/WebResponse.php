@@ -17,7 +17,7 @@ class WebResponse implements Response
         return $this->templateName;
     }
 
-    public function getParamenter()
+    public function getParameters()
     {
         return $this->parameters;
     }

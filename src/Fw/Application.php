@@ -7,6 +7,9 @@ use Fw\Component\Request\Request;
 use Fw\Component\Response\JsonResponse;
 use Fw\Component\Response\WebResponse;
 use Fw\Component\Controller\Controller;
+use Fw\Component\View\WebView;
+use Fw\Component\View\JsonView;
+use Fw\Component\View\TwigView;
 
 final class Application
 {
@@ -19,16 +22,17 @@ final class Application
 
     public function run()
     {
+        $request = $this->requestComponent;
         $requestPath = $this->requestComponent->getPath();
         $requestSubRoute = $this->routerComponent->getSubRouteName($requestPath);
         $controller = $this->dispatcherComponent->getController($requestSubRoute);
         $invokeResponse = new $controller();
         $response = $invokeResponse($request);
 
-        if ($response->getData() instanceof JsonResponse) {
+        if ($response->getParameters() instanceof JsonResponse) {
             $view = new JsonView();
         } else {
-            $view = new TwigView();
+            $view = $this->viewComponent;
         }
         $view->render($response);
     }
@@ -47,5 +51,9 @@ final class Application
     {
         $this->dispatcherComponent = $dispatcherComponent;
     }
-}
 
+    public function setWebView(WebView $twig)
+    {
+        $this->viewComponent = $twig;
+    }
+}

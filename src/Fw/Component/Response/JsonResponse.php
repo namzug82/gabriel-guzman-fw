@@ -10,7 +10,7 @@ class JsonResponse implements Response
         $this->data = $dataFromController;
     }
 
-    public function getData()
+    public function getParameters()
     {
         return $this->data;
     }
