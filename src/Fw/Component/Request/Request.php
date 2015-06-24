@@ -38,21 +38,21 @@ class Request implements \ArrayAccess
 
     public function offsetSet($offset, $value) {
         if (is_null($offset)) {
-            $this->container[] = $value;
+            $this->method[] = $value;
         } else {
-            $this->container[$offset] = $value;
+            $this->method[$offset] = $value;
         }
     }
 
     public function offsetExists($offset) {
-        return isset($this->container[$offset]);
+        return isset($this->method[$offset]);
     }
 
     public function offsetUnset($offset) {
-        unset($this->container[$offset]);
+        unset($this->method[$offset]);
     }
 
     public function offsetGet($offset) {
-        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+        return isset($this->method[$offset]) ? $this->method[$offset] : null;
     }
 }

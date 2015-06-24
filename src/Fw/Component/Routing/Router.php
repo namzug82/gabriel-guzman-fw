@@ -1,6 +1,8 @@
 <?php
 namespace Fw\Component\Routing;
 
+//use Fw\Component\Exception\PathNotFoundInRoutingConfigFile;
+
 final class Router 
 {
     private $route;
@@ -27,5 +29,6 @@ final class Router
                 return $subRoute;
             }
         }
+        //throw new PathNotFoundInRoutingConfigFile("Error Processing Request", 1);
     }
 }

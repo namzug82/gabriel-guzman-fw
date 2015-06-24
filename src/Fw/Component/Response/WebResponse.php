@@ -3,15 +3,22 @@ namespace Fw\Component\Response;
 
 class WebResponse implements Response
 {
-    private $data;
+    private $parameters;
+    private $templateName;
 
-    public function __construct($dataFromController) 
+    public function __construct($templateName, $parameters) 
     {
-        $this->data = $dataFromController;
+        $this->templateName = $templateName;
+        $this->parameters = $parameters;
     }
 
-    public function getData()
+    public function getTemplateName()
     {
-        return $this->data;
+        return $this->templateName;
+    }
+
+    public function getParamenter()
+    {
+        return $this->parameters;
     }
 }
