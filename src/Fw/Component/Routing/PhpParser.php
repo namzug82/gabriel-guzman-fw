@@ -3,7 +3,6 @@ namespace Fw\Component\Routing;
 
 final class PhpParser implements Routing
 {   
-    private $parser;
     private $path;
 
     public function __construct($path)
@@ -13,6 +12,6 @@ final class PhpParser implements Routing
 
     public function parseRoutes()
     {
-        return file_get_contents($this->path);
+        return include $this->path;
     }
 }
