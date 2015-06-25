@@ -23,20 +23,25 @@ final class Application
 
     public function run()
     {
-        $request = $this->requestComponent;
-        $database = $this->databaseComponent;
-        $requestPath = $this->requestComponent->getPath();
-        $requestSubRoute = $this->routerComponent->getSubRouteName($requestPath);
-        $controller = $this->dispatcherComponent->getController($requestSubRoute);
-        $invokeResponse = new $controller($database);
-        $response = $invokeResponse($request);
+        try {
+            $request = $this->requestComponent;
+            $database = $this->databaseComponent;
+            $requestPath = $this->requestComponent->getPath();
+            $requestMethod = $this->requestComponent->getMethod();
+            $requestSubRoute = $this->routerComponent->getSubRouteName($requestPath, $requestMethod);
+            $controller = $this->dispatcherComponent->getController($requestSubRoute);
+            $invokeResponse = new $controller($database);
+            $response = $invokeResponse($request);
 
-        if ($response->getParameters() instanceof JsonResponse) {
-            $view = new JsonView();
-        } else {
-            $view = $this->viewComponent;
+            if ($response->getParameters() instanceof JsonResponse) {
+                $view = new JsonView();
+            } else {
+                $view = $this->viewComponent;
+            }
+            $view->render($response);
+        } catch (Exception $e) {
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
-        $view->render($response);
     }
 
     public function setRouter(Router $routerComponent)

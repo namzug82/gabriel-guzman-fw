@@ -8,11 +8,12 @@ class Request implements \ArrayAccess
 
     public function __construct() 
     {
-        $this->method = array(
-            "get"   => $_GET,
-            "post"   => $_POST,
-            "server" => $_SERVER,
-        );
+        if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
+            $this->method = array( "post" => $_POST, "server" => $_SERVER);
+        } else {
+            $this->method = array( "get" => $_GET, "server" => $_SERVER);
+        }
+
         $this->path = $this->getServerUrl();
     }
 

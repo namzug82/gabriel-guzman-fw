@@ -1,8 +1,6 @@
 <?php
 namespace Fw\Component\Routing;
 
-//use Fw\Component\Exception\PathNotFoundInRoutingConfigFile;
-
 final class Router 
 {
     private $route;
@@ -21,14 +19,31 @@ final class Router
         }
     }
 
-    public function getSubRouteName($path)
+    public function getSubRouteName($path, $requestMethods)
     {
         foreach ($this->route as $key => $value) {
             if ($key == $this->getRouteNameIfMatchPath($path)) {
-                $subRoute = $value;
-                return $subRoute;
+                $controllerSubRoute = $value;
+                if ($this->checkIfMethodIsAllowed($controllerSubRoute, $requestMethods)) {
+                    return $controllerSubRoute;    
+                } else {
+                    throw new \Exception("Error: This method is not allowed in controller.");
+                }
             }
         }
-        //throw new PathNotFoundInRoutingConfigFile("Error Processing Request", 1);
+        throw new \Exception("Error: This request doesn't have an associated controller.");
+    }
+
+    public function checkIfMethodIsAllowed($controllerSubRoute, $requestMethods)
+    {
+        foreach ($controllerSubRoute as $keyAllowedMethod => $allowedMethods) {
+            if ($keyAllowedMethod == "allowed_methods") {
+                foreach ($requestMethods as $key => $value) {
+                    if (in_array($key, $allowedMethods)) {
+                        return true;
+                    }
+                }
+            } 
+        }
     }
 }
