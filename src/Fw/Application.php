@@ -23,10 +23,11 @@ final class Application
     public function run()
     {
         $request = $this->requestComponent;
+        $database = $this->databaseComponent;
         $requestPath = $this->requestComponent->getPath();
         $requestSubRoute = $this->routerComponent->getSubRouteName($requestPath);
         $controller = $this->dispatcherComponent->getController($requestSubRoute);
-        $invokeResponse = new $controller();
+        $invokeResponse = new $controller($database);
         $response = $invokeResponse($request);
 
         if ($response->getParameters() instanceof JsonResponse) {
@@ -55,5 +56,10 @@ final class Application
     public function setWebView(WebView $twig)
     {
         $this->viewComponent = $twig;
+    }
+
+    public function setDatabase(Database $database)
+    {
+        $this->databaseComponent = $database;
     }
 }
