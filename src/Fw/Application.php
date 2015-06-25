@@ -10,6 +10,7 @@ use Fw\Component\Controller\Controller;
 use Fw\Component\View\WebView;
 use Fw\Component\View\JsonView;
 use Fw\Component\View\TwigView;
+use Fw\Component\Database\Database;
 
 final class Application
 {

@@ -8,29 +8,22 @@ final class PDO implements MySQL
     public function __construct($db, $host, $user, $password)
     {
         try {
-            $dbh = new \PDO("mysql:host=$host", $user, $password);
-            $dbh->exec("CREATE DATABASE IF NOT EXISTS " . 
+            $dbBuilder = new \PDO("mysql:host=$host", $user, $password);
+            $dbBuilder->exec("CREATE DATABASE IF NOT EXISTS " . 
                             $db . 
                             ";
                         USE " . 
                             $db .
                             ";
                         ")
-                        // CREATE TABLE IF NOT EXISTS 
-                        //     $tableName;
-                        //     (
-                        //         id INT(10) PRIMARY KEY AUTO_INCREMENT,
-                        //         username VARCHAR(255) NOT NULL,
-                        //         password VARCHAR(255) NOT NULL
-                        //     );
-                or die(print_r($dbh->errorInfo(), true));
+                or die(print_r($dbBuilder->errorInfo(), true));
+            $this->db = new \PDO("mysql:dbname=$db;host=$host", $user, $password);
+            $this->db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+            $this->db->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
         } 
         catch (PDOException $e) {
             die("DB ERROR: ". $e->getMessage());
         }
-        $this->db = new \PDO("mysql:dbname=$db;host=$host", $user, $password);
-        $this->db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-        $this->db->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
     }
 
     public function prepare($query)
