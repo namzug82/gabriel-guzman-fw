@@ -29,13 +29,13 @@ class Request implements \ArrayAccess
 
     public function getServerUrl()
     {
-        if ($_SERVER['REQUEST_URI'] == "/") {
-            return $_SERVER['REQUEST_URI'];
+        if ($_SERVER['REQUEST_URI'] == "/" || $_SERVER['REQUEST_URI'] == "/index.php") {
+            return "/";
         } 
         else {
             return substr($_SERVER['PATH_INFO'], 1);
         }
-    } 
+    }  
 
     public function offsetSet($offset, $value) {
         if (is_null($offset)) {
