@@ -11,6 +11,7 @@ use Fw\Component\View\WebView;
 use Fw\Component\View\JsonView;
 use Fw\Component\View\TwigView;
 use Fw\Component\Database\Database;
+use Fw\Component\Container\Container;
 
 final class Application
 {
@@ -25,12 +26,12 @@ final class Application
     {
         try {
             $request = $this->requestComponent;
-            $database = $this->databaseComponent;
+            $container = $this->containerComponent;
             $requestPath = $this->requestComponent->getPath();
             $requestMethod = $this->requestComponent->getMethod();
             $requestSubRoute = $this->routerComponent->getSubRouteName($requestPath, $requestMethod);
             $controller = $this->dispatcherComponent->getController($requestSubRoute);
-            $invokeResponse = new $controller($database);
+            $invokeResponse = new $controller($container);
             $response = $invokeResponse($request);
 
             if ($response->getParameters() instanceof JsonResponse) {
@@ -67,5 +68,10 @@ final class Application
     public function setDatabase(Database $database)
     {
         $this->databaseComponent = $database;
+    }
+
+    public function setContainer(Container $container)
+    {
+        $this->containerComponent = $container;
     }
 }
