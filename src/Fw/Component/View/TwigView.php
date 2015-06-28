@@ -9,7 +9,7 @@ class TwigView implements WebView
 
     public function __construct($templatesPath)
     {
-        $loader = new \Twig_Loader_Filesystem( $templatesPath );
+        $loader = new \Twig_Loader_Filesystem( __DIR__ . $templatesPath );
         $this->twig = new \Twig_Environment( $loader, ['debug' => true] );
     }
 

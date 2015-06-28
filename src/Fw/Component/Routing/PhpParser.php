@@ -7,7 +7,7 @@ final class PhpParser implements Routing
 
     public function __construct($path)
     {
-        $this->path = $path;
+        $this->path = __DIR__ . $path;
     }
 
     public function parseRoutes()

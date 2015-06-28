@@ -1,43 +1,33 @@
 <?php
 namespace Fw;
 
-use Fw\Component\Routing\Router;
-use Fw\Component\Dispatcher\Dispatcher;
-use Fw\Component\Request\Request;
-use Fw\Component\Response\JsonResponse;
-use Fw\Component\Response\WebResponse;
-use Fw\Component\Controller\Controller;
-use Fw\Component\View\WebView;
-use Fw\Component\View\JsonView;
-use Fw\Component\View\TwigView;
-use Fw\Component\Database\Database;
 use Fw\Component\Container\Container;
+use Fw\Component\Controller\Controller;
+use Fw\Component\Response\JsonResponse;
+use Fw\Component\View\JsonView;
 
 final class Application
 {
-    private $routerComponent;
-    private $dispatcherComponent;
-    private $requestComponent;
-    private $responseComponent;
-    private $viewComponent;
-    private $databaseComponent;
+    private $container;
 
     public function run()
     {
         try {
-            $request = $this->requestComponent;
-            $container = $this->containerComponent;
-            $requestPath = $this->requestComponent->getPath();
-            $requestMethod = $this->requestComponent->getMethod();
-            $requestSubRoute = $this->routerComponent->getSubRouteName($requestPath, $requestMethod);
-            $controller = $this->dispatcherComponent->getController($requestSubRoute);
-            $invokeResponse = new $controller($container);
+            $container = $this->container->getContainer();
+            $request = $container->get('request');
+            $router = $container->get('router');
+            $dispatcher = $container->get('dispatcher');
+            $requestPath = $request->getPath();
+            $requestMethod = $request->getMethod();
+            $requestSubRoute = $router->getSubRouteName($requestPath, $requestMethod);
+            $controller = $dispatcher->getController($requestSubRoute);
+            $invokeResponse = new $controller($this->container);
             $response = $invokeResponse($request);
 
             if ($response->getParameters() instanceof JsonResponse) {
                 $view = new JsonView();
             } else {
-                $view = $this->viewComponent;
+                $view = $container->get('twig_view');
             }
             $view->render($response);
         } catch (Exception $e) {
@@ -45,33 +35,8 @@ final class Application
         }
     }
 
-    public function setRouter(Router $routerComponent)
-    {
-        $this->routerComponent = $routerComponent;
-    }
-
-    public function setRequest(Request $requestComponent)
-    {
-        $this->requestComponent = $requestComponent;
-    }
-
-    public function setDispatcher(Dispatcher $dispatcherComponent)
-    {
-        $this->dispatcherComponent = $dispatcherComponent;
-    }
-
-    public function setWebView(WebView $twig)
-    {
-        $this->viewComponent = $twig;
-    }
-
-    public function setDatabase(Database $database)
-    {
-        $this->databaseComponent = $database;
-    }
-
     public function setContainer(Container $container)
     {
-        $this->containerComponent = $container;
+        $this->container = $container;
     }
 }

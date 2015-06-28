@@ -9,7 +9,7 @@ final class YamlParser implements Routing
     public function __construct($parser, $path)
     {
         $this->parser = $parser;
-        $this->path = $path;
+        $this->path = __DIR__ . $path;
     }
 
     public function parseRoutes()
