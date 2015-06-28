@@ -3,6 +3,7 @@
 
 ### Funcionamiento:
 
+
 El Framework está compuesto por "Application.php" y diversos componentes descritos con más detalle en el apartado siguiente.
 
 Application.php se encarga de designar a través de los "setters", los componentes necesarios para ejecutar una aplicación a través del método "run()". 
@@ -99,3 +100,4 @@ Application.php se encarga de designar a través de los "setters", los component
 Según este Framework, podríamos decir que una petición haría el siguiente Flujo:
 
 index.php -> Application -> Router -> Dispatcher -> Controller -> Database -> Response -> View
+
