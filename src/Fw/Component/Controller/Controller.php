@@ -5,5 +5,5 @@ use Fw\Component\Request\Request;
 
 interface Controller
 {
-    public function __invoke(Request $request);
+    public function __invoke(Array $parameters);
 }
