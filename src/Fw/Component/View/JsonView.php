@@ -7,6 +7,6 @@ class JsonView implements View
 {
     public function render(Response $response)
     {
-        echo json_encode($response->getData());
+        echo json_encode($response->getParameters());
     }
 }

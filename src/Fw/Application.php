@@ -32,7 +32,7 @@ final class Application
             //    $cache->set($key, $response, 0, 300);
             // }
 
-            if ($response->getParameters() instanceof JsonResponse) {
+            if ($response instanceof JsonResponse) {
                 $view = new JsonView();
             } else {
                 $view = $container->get('twig_view');
