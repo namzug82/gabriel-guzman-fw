@@ -7,7 +7,7 @@ final class Cache
 
 	public function __construct()
 	{
-		$this->cache = new \Memcached();
+		$this->cache = new \Memcache();
 		$this->cache->addServer('localhost', 11211);
 	}
 	
