@@ -2,10 +2,7 @@
 namespace Fw;
 
 use Fw\Component\Container\Container;
-use Fw\Component\Cache\Cache;
-use Fw\Component\Controller\Controller;
 use Fw\Component\Response\JsonResponse;
-use Fw\Component\View\JsonView;
 
 final class Application
 {
@@ -16,10 +13,10 @@ final class Application
         try {
             $container = $this->container->getContainer();
             $request = $container->get('request');
-            $cache = new Cache();
+            $cache = $container->get('cache');
             $key = hash('sha1', $request->getPath());
             $response = $cache->get($key);
-            if (null === $response) {
+            if (false === $response) {
                 $router = $container->get('router');
                 $dispatcher = $container->get('dispatcher');
                 $requestPath = $request->getPath();
@@ -29,11 +26,11 @@ final class Application
                 $parameters = $dispatcher->getParameters($requestSubRoute, $requestPath);
                 $invokeResponse = new $controller($this->container);
                 $response = $invokeResponse($parameters);
-               $cache->set($key, $response, 0, 300);
+                $cache->set($key, $response, 0, 300);
             }
 
             if ($response instanceof JsonResponse) {
-                $view = new JsonView();
+                $view = $container->get('json_view');
             } else {
                 $view = $container->get('twig_view');
             }
