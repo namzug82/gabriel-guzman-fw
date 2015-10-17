@@ -18,7 +18,7 @@ final class MySqlPdo implements MySQL
                         ")
                 or die(print_r($dbBuilder->errorInfo(), true));
             $this->db = new \PDO("mysql:dbname=$db;host=$host", $user, $password);
-            // $this->db->exec("SET CHARACTER SET utf8");
+            $this->db->exec("SET CHARACTER SET utf8");
             $this->db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
             $this->db->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
         } 
