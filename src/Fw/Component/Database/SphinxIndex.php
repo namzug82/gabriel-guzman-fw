@@ -14,7 +14,7 @@ final class SphinxIndex extends Sphinx
 
     public function prepare($query)
     {
-        $this->sphinx->AddQuery( $query, $this->index );
-        return $this->sphinx->RunQueries();
+        $this->sphinx->addQuery( $query, $this->index );
+        return $this->sphinx->runQueries();
     }
 }
