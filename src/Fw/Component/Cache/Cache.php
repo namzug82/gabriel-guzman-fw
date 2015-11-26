@@ -20,4 +20,9 @@ final class Cache
 	{
 		$this->cache->set($key, $value, 0, $expiration_in_seconds);
 	}
+
+	public function flush()
+	{
+		$this->cache->flush();
+	}
 }
